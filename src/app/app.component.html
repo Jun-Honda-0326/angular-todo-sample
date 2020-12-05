@@ -1,6 +1,12 @@
 <ul>
   <!-- ngForによる繰り返し処理 -->
-  <li *ngFor="let task of tasks">
-    <span *ngIf="task.done">[完了]</span>
+  <li *ngFor="let task of tasks" class="{{ task.done ? 'done': ' '}}">
     {{ task.title }}
+  </li>
+
+  <li>
+    <input type="text" [(ngModel)]="newTaskTitle">
+    <button (click)="addTask()">追加</button>
+  </li>
+
 </ul>
