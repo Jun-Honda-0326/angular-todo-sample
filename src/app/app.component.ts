@@ -12,10 +12,16 @@ export class AppComponent {
     {title: '銀行に行く', done: false},
   ];
 
-  newTaskTitle = '';
+  newTask = {
+    title: '',
+    deadline: new Date(),
+  };
 
   addTask(){
-    this.tasks.push({title: this.newTaskTitle, done: false})
-    this.newTaskTitle = '';
+    this.tasks.push({title: this.newTask.title, done: false, deadline: new Date(this.newTask.deadline)})
+    this.newTask = {
+      title: '',
+      deadline: new Date(),
+    };
   }
 }
