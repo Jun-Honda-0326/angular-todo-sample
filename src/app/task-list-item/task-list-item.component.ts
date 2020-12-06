@@ -9,13 +9,13 @@ export class TaskListItemComponent implements OnInit {
 
   constructor() { }
 
-  @Input() task;
+  @Input() task: Task;
 
   ngOnInit(): void {
   }
 
-  isOverdue(task) {
-    return !task.done && task.deadline < (new Date()).setHours(0, 0, 0, 0);
+  isOverdue(task: Task): boolean {
+    return !task.done && task.deadline.getTime() < (new Date()).setHours(0, 0, 0, 0);
   }
 
 }
