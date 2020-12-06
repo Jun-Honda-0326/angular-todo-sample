@@ -1,7 +1,10 @@
 <ul>
   <!-- ngForによる繰り返し処理 -->
   <li *ngFor="let task of tasks" class="{{ task.done ? 'done': ' '}}">
-    {{ task.title }}
+    <labbel>
+      <input type="checkbox" [(ngModel)]="task.done">
+      {{ task.title }}
+    </labbel>
   </li>
 
   <li>
