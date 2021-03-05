@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Task } from '../../models/task';
 
 @Component({
   selector: 'app-task-form',
@@ -30,4 +31,5 @@ export class TaskFormComponent implements OnInit {
       deadline: null,
     };
   }
+
 }
