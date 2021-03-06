@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { Task } from '../../models/task';
 
 
@@ -12,6 +12,14 @@ export class TaskListItemComponent implements OnInit {
   constructor() { }
 
   @Input() task: Task;
+  @Input() index: number;
+
+  @Output() delete = new EventEmitter
+
+  //親コンポネントへidを渡す
+  deleteTask(index) {
+    this.delete.emit(index)
+  }
 
   ngOnInit(): void {
   }
@@ -19,4 +27,9 @@ export class TaskListItemComponent implements OnInit {
   isOverdue(task: Task): boolean {
     return !task.done && task.deadline &&  task.deadline.getTime() < (new Date()).setHours(0, 0, 0, 0);
   }
+
+
+
+
+
 }

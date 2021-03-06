@@ -20,4 +20,8 @@ export class TaskListComponent implements OnInit {
     this.tasks.push(task);
   }
 
+  deleteTask(index: number): void {
+    this.tasks.splice(index, 1)
+  }
+
 }

@@ -23,8 +23,8 @@ export class TaskFormComponent implements OnInit {
   submit(): void {
     this.addTask.emit({
       title: this.newTask.title,
-       done: false,
-       deadline: this.newTask.deadline ? new Date(this.newTask.deadline): null,
+      done: false,
+      deadline: this.newTask.deadline ? new Date(this.newTask.deadline): null,
     });
     this.newTask = {
       title: '',
