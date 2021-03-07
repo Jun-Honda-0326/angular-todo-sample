@@ -2,12 +2,13 @@
   <!-- ngForによる繰り返し処理 -->
   <li *ngFor= "let task of tasks; let i = index">
     <app-task-list-item
-      [task]="task" [index]="i"
-      (delete)="deleteTask($event)"
+      [task]="task"
+      [index]="i"
+      (deleteId)="deleteTask($event)"
       >
     </app-task-list-item>
   </li>
   <li>
-    <app-task-form (addTask)="addTask($event)"></app-task-form>
+    <app-task-form  (addTask)="addTask($event)" ></app-task-form>
   </li>
 </ul>

@@ -24,4 +24,5 @@ export class TaskListComponent implements OnInit {
     this.tasks.splice(index, 1)
   }
 
+
 }

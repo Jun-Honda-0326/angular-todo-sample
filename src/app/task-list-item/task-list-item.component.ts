@@ -8,25 +8,35 @@ import { Task } from '../../models/task';
   styleUrls: ['./task-list-item.component.css']
 })
 export class TaskListItemComponent implements OnInit {
+  show: boolean = false
 
   constructor() { }
 
   @Input() task: Task;
   @Input() index: number;
 
-  @Output() delete = new EventEmitter
+  @Output() deleteId = new EventEmitter<number>()
+
 
   //親コンポネントへidを渡す
   deleteTask(index) {
-    this.delete.emit(index)
+    this.deleteId.emit(index)
   }
 
-  ngOnInit(): void {
-  }
+
+
+  ngOnInit(): void { }
 
   isOverdue(task: Task): boolean {
     return !task.done && task.deadline &&  task.deadline.getTime() < (new Date()).setHours(0, 0, 0, 0);
   }
+
+  active(): void {
+    this.show = !this.show
+
+  }
+
+
 
 
 

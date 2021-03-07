@@ -2,7 +2,14 @@
   <input type="checkbox" [(ngModel)]="task.done">
   {{ task.title }}
   <span *ngIf="task.deadline">(期日: {{ task.deadline|date: 'yyyy/MM/dd' }})</span>
-  <button >編集</button>
+
+  <button (click)="active()">編集</button>
+  <div *ngIf="show" class="edit">
+    <input type="text">
+    <input type="date" >
+  </div>
+
+
   <button (click)="deleteTask(index)">削除</button>
   <span *ngIf="isOverdue(task)" class="overdue">期日超過</span>
 </label>
