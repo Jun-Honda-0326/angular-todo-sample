@@ -1,5 +1,8 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { formatWithOptions } from 'util';
 import { Task } from '../../models/task';
+import { EditTask } from '../../models/task';
+
 
 
 @Component({
@@ -7,6 +10,7 @@ import { Task } from '../../models/task';
   templateUrl: './task-list-item.component.html',
   styleUrls: ['./task-list-item.component.css']
 })
+
 export class TaskListItemComponent implements OnInit {
   show: boolean = false
 
@@ -16,11 +20,33 @@ export class TaskListItemComponent implements OnInit {
   @Input() index: number;
 
   @Output() deleteId = new EventEmitter<number>()
-
+  @Output() edit= new EventEmitter<EditTask>()
 
   //親コンポネントへidを渡す
   deleteTask(index) {
     this.deleteId.emit(index)
+  }
+
+
+
+
+  subimit(index: number, task: Task): void {
+    let editTask = {
+      index: index,
+      task: task
+    }
+    this.edit.emit({
+      index: editTask.index,
+      task: {
+        title: editTask.task.title,
+        done:  editTask.task.done,
+        deadline: new Date(editTask.task.deadline)
+      }
+    });
+    editTask = {
+      index: index,
+      task: task
+    };
   }
 
 
@@ -33,8 +59,9 @@ export class TaskListItemComponent implements OnInit {
 
   active(): void {
     this.show = !this.show
-
   }
+
+
 
 
 

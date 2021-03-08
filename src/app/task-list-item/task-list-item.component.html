@@ -5,8 +5,9 @@
 
   <button (click)="active()">編集</button>
   <div *ngIf="show" class="edit">
-    <input type="text">
-    <input type="date" >
+    <input type="text" [(ngModel)]="task.title">
+    <input type="date" [(ngModel)]="task.deadline">
+    <button (click)="subimit(index, task)">更新</button>
   </div>
 
 

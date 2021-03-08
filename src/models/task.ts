@@ -3,3 +3,8 @@ export interface Task{
   done: boolean;
   deadline?: Date;
 }
+
+export class EditTask {
+  index: number
+  task: Task
+}

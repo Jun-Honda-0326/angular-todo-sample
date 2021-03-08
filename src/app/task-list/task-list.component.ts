@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../../models/task';
+import { EditTask, Task } from '../../models/task';
 
 @Component({
   selector: 'app-task-list',
@@ -22,6 +22,13 @@ export class TaskListComponent implements OnInit {
 
   deleteTask(index: number): void {
     this.tasks.splice(index, 1)
+  }
+
+  editTask(editTask: EditTask): void {
+     editTask.task.deadline.getTime() < (new Date()).setHours(0, 0, 0, 0)
+    this.tasks.splice(editTask.index, 1, editTask.task)
+    console.log(editTask)
+    console.log(this.tasks)
   }
 
 
