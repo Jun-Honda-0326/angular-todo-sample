@@ -1,3 +1,3 @@
-<input type="text" [(ngModel)]="newTask.title" #title="ngModel" required>
-<input type="date" [(ngModel)]="newTask.deadline">
-<button (click)="submit()" [disabled]="title.invalid">追加</button>
+<input type="text" [(ngModel)]="task.title">
+<input type="date" [(ngModel)]="task.deadline">
+<button (click)="addTask(task)">追加</button>

@@ -18,7 +18,24 @@ export class TaskService {
   }
 
   addTask(task: Task):void  {
-    this.tasks.push(task)
-    console.log(this.tasks)
+    const newTask: Task = {
+      title: task.title,
+      done: false,
+      deadline: task.deadline ? new Date(task.deadline): null
+    }
+    this.tasks.push(newTask)
+  }
+
+  editTask(index: number, task: Task): void {
+    const editTask: Task = {
+      title: task.title,
+      done: false,
+      deadline: task.deadline ? new Date(task.deadline): null
+    }
+    this.tasks.splice(index, 1, editTask)
+  }
+
+  deleteTask(index: number): void {
+    this.tasks.splice(index, 1)
   }
 }

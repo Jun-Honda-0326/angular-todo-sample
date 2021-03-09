@@ -4,12 +4,10 @@
     <app-task-list-item
       [task]="task"
       [index]="i"
-      (deleteId)="deleteTask($event)"
-      (edit)="editTask($event)"
       >
     </app-task-list-item>
   </li>
   <li>
-    <app-task-form (addTask)="addTask($event)" ></app-task-form>
+    <app-task-form></app-task-form>
   </li>
 </ul>

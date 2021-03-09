@@ -7,9 +7,8 @@
   <div *ngIf="show" class="edit">
     <input type="text" [(ngModel)]="task.title">
     <input type="date" [(ngModel)]="task.deadline">
-    <button (click)="subimit(index, task)">更新</button>
+    <button (click)="editTask(index, task)">更新</button>
   </div>
-
 
   <button (click)="deleteTask(index)">削除</button>
   <span *ngIf="isOverdue(task)" class="overdue">期日超過</span>
