@@ -27,7 +27,7 @@ export class TaskListItemComponent implements OnInit {
   }
 
   isOverdue(task: Task): boolean {
-    return !task.done && task.deadline && task.deadline.getTime() < (new Date()).setHours(0, 0, 0, 0);
+    return !task.done && task.deadline < new Date()
   }
 
   active(): void {
