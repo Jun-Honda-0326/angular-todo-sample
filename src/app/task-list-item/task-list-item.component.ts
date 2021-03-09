@@ -22,34 +22,20 @@ export class TaskListItemComponent implements OnInit {
   @Output() deleteId = new EventEmitter<number>()
   @Output() edit= new EventEmitter<EditTask>()
 
-  //親コンポネントへidを渡す
-  deleteTask(index) {
+  deleteTask(index: number) {
     this.deleteId.emit(index)
   }
 
-
-
-
   subimit(index: number, task: Task): void {
-    let editTask = {
-      index: index,
-      task: task
-    }
     this.edit.emit({
-      index: editTask.index,
+      index: index,
       task: {
-        title: editTask.task.title,
-        done:  editTask.task.done,
-        deadline: new Date(editTask.task.deadline)
+        title: task.title,
+        done:  task.done,
+        deadline: new Date(task.deadline)
       }
     });
-    editTask = {
-      index: index,
-      task: task
-    };
   }
-
-
 
   ngOnInit(): void { }
 
@@ -60,13 +46,6 @@ export class TaskListItemComponent implements OnInit {
   active(): void {
     this.show = !this.show
   }
-
-
-
-
-
-
-
 
 
 }

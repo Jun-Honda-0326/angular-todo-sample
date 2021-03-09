@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditTask, Task } from '../../models/task';
+import { TaskService } from '../task.service'
 
 @Component({
   selector: 'app-task-list',
@@ -7,17 +8,22 @@ import { EditTask, Task } from '../../models/task';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
+  tasks: Task[]
 
-  constructor() { }
-  tasks: Task[] = [
-    { title: '銀行に行く', done: false, deadline: new Date('2020-01-03') }
-  ]
+  constructor(private taskService: TaskService) { }
+
 
   ngOnInit(): void {
+    this.getTasks()
+  }
+
+  getTasks(): void {
+    this.taskService.getTasks()
+      .subscribe(tasks => this.tasks = tasks)
   }
 
   addTask(task: Task):void{
-    this.tasks.push(task);
+    this.taskService.addTask(task)
   }
 
   deleteTask(index: number): void {
