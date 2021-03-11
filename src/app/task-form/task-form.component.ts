@@ -8,6 +8,7 @@ import { TaskService } from '../task.service';
   styleUrls: ['./task-form.component.css']
 })
 export class TaskFormComponent implements OnInit {
+  tasks: Task[]
 
   constructor(private taskService: TaskService) { }
 
@@ -19,8 +20,10 @@ export class TaskFormComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  addTask(task): void {
-    this.taskService.addTask(task)
+  addTask(task: Task): void {
+    this.taskService.addTask(task).subscribe(task =>  {
+      this.tasks.push(task)
+    })
   }
 
 }

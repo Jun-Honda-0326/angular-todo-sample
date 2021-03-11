@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Task } from '../models/task';
 
@@ -6,36 +7,41 @@ import { Task } from '../models/task';
   providedIn: 'root'
 })
 export class TaskService {
-  tasks: Task[] = [
-    { title: '銀行に行く', done: false, deadline: new Date('2020-01-03') }
-  ]
+  private tasks = 'api/tasks'
 
-  constructor() { }
-
-  getTasks(): Observable<Task[]> {
-    const tasks = of(this.tasks)
-    return tasks
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  addTask(task: Task):void  {
+  constructor(private http: HttpClient) { }
+
+  getTasks(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.tasks)
+  }
+
+  addTask(task: Task): Observable<Task> {
     const newTask: Task = {
       title: task.title,
       done: false,
       deadline: task.deadline ? new Date(task.deadline): null
     }
-    this.tasks.push(newTask)
+    console.log(this.tasks)
+    console.log(newTask)
+    return this.http.post<Task>(this.tasks, newTask, this.httpOptions)
+
   }
 
-  editTask(index: number, task: Task): void {
+  editTask(index: number, task: Task): Observable<Task> {
     const editTask: Task = {
       title: task.title,
       done: false,
       deadline: task.deadline ? new Date(task.deadline): null
     }
-    this.tasks.splice(index, 1, editTask)
+    return this.http.put<Task>(this.tasks, editTask, this.httpOptions)
   }
 
-  deleteTask(index: number): void {
-    this.tasks.splice(index, 1)
+  deleteTask(index: number): Observable<Task> {
+    const url = `${this.tasks}/${index}`
+    return this.http.delete<Task>(url, this.httpOptions)
   }
 }
