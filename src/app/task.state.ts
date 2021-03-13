@@ -9,12 +9,14 @@ import { coerceStringArray } from '@angular/cdk/coercion';
 
 export class TaskStateModel {
   tasks: Task[]
+  selectedTask: Task
 }
 
 @State<TaskStateModel>({
   name: 'tasks',
   defaults: {
-    tasks: []
+    tasks: [],
+    selectedTask: null
   },
 })
 
@@ -46,24 +48,25 @@ export class TaskState {
   deleteTask(ctx: StateContext<TaskStateModel>, action: TaskAction.Delete) {
     const index = action.payload
     return this.taskService.deleteTask(index).pipe(
-    finalize(() => {
-      ctx.dispatch(new TaskAction.GetAll())
-    })
-  )
-
-  // @Action(TaskAction.Update)
-  // editTask(ctx: StateContext<TaskStateModel>, action: TaskAction.Update) {
-  //   const task = action.payload
-  //   return this.taskService.editTask(task).pipe(
-  //     finalize(() => {
-  //       ctx.patchState(task)
-  //     })
-  //   )
-  // }
-
-
-
+      finalize(() => {
+        ctx.dispatch(new TaskAction.GetAll())
+      })
+    )
   }
+
+  @Action(TaskAction.Update)
+  editTask(ctx: StateContext<TaskStateModel>, action: TaskAction.Update) {
+    const task = action.payload
+    return this.taskService.editTask(task).pipe(
+      finalize(() => {
+        ctx.patchState({
+          selectedTask: task
+        })
+      })
+    )
+  }
+
+
 
   @Selector()
   static tasks(state: TaskStateModel) {
@@ -71,22 +74,9 @@ export class TaskState {
   }
 
   @Selector()
-   static genId(state: TaskStateModel) {
-    return state.tasks.length
+  static selectedTask(state: TaskStateModel) {
+    return state.selectedTask
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

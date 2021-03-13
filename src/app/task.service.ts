@@ -32,7 +32,7 @@ export class TaskService {
 
   }
 
-  editTask(index: number, task: Task): Observable<Task> {
+  editTask(task: Task): Observable<Task> {
     const editTask: Task = {
       id:    task.id,
       title: task.title,

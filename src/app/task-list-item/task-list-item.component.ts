@@ -19,12 +19,11 @@ export class TaskListItemComponent implements OnInit {
     ) { }
 
   @Input() task: Task;
-  @Input() index: number;
 
   ngOnInit(): void { }
 
-  editTask(index: number, task: Task): void {
-    this.taskService.editTask(index, task)
+  editTask(task: Task): void {
+    this.store.dispatch(new TaskAction.Update(task))
   }
 
   deleteTask(id: number):void {

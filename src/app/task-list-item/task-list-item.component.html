@@ -7,7 +7,7 @@
   <div *ngIf="show" class="edit">
     <input type="text" [(ngModel)]="task.title">
     <input type="date" [(ngModel)]="task.deadline">
-    <button (click)="editTask(index, task)">更新</button>
+    <button (click)="editTask(task)">更新</button>
   </div>
 
   <button (click)="deleteTask(task.id)">削除</button>
