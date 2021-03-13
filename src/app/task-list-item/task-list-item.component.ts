@@ -1,5 +1,7 @@
 import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
+import { Store, Select } from '@ngxs/store'
 import { Task } from '../../models/task';
+import { TaskAction } from '../task.action';
 import { TaskService } from '../task.service';
 
 @Component({
@@ -11,7 +13,10 @@ import { TaskService } from '../task.service';
 export class TaskListItemComponent implements OnInit {
   show: boolean = false
 
-  constructor(private taskService: TaskService) { }
+  constructor(
+    private taskService: TaskService,
+    private store: Store
+    ) { }
 
   @Input() task: Task;
   @Input() index: number;
@@ -22,8 +27,8 @@ export class TaskListItemComponent implements OnInit {
     this.taskService.editTask(index, task)
   }
 
-  deleteTask(index: number):void {
-    this.taskService.deleteTask(index)
+  deleteTask(id: number):void {
+    this.store.dispatch(new TaskAction.Delete(id))
   }
 
   isOverdue(task: Task): boolean {

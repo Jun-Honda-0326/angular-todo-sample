@@ -10,6 +10,6 @@
     <button (click)="editTask(index, task)">更新</button>
   </div>
 
-  <button (click)="deleteTask(index)">削除</button>
+  <button (click)="deleteTask(task.id)">削除</button>
   <span *ngIf="isOverdue(task)" class="overdue">期日超過</span>
 </label>

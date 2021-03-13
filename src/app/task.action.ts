@@ -13,12 +13,12 @@ export namespace TaskAction {
 
   export class Update {
     static readonly type = '[Task] Update'
-    constructor(public task: Task) {}
+    constructor(public payload: Task) {}
   }
 
   export class Delete {
     static readonly type = '[Task] Delete'
-    constructor(public index: number) {}
+    constructor(public payload: number) {}
   }
 
 }

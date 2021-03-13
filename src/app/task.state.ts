@@ -5,6 +5,7 @@ import { Task } from '../models/task';
 import { TaskAction } from './task.action';
 import { TaskService } from './task.service';
 import { tap, finalize } from 'rxjs/operators';
+import { coerceStringArray } from '@angular/cdk/coercion';
 
 export class TaskStateModel {
   tasks: Task[]
@@ -39,6 +40,52 @@ export class TaskState {
       })
     )
   }
+
+
+  @Action(TaskAction.Delete)
+  deleteTask(ctx: StateContext<TaskStateModel>, action: TaskAction.Delete) {
+    const index = action.payload
+    return this.taskService.deleteTask(index).pipe(
+    finalize(() => {
+      ctx.dispatch(new TaskAction.GetAll())
+    })
+  )
+
+  // @Action(TaskAction.Update)
+  // editTask(ctx: StateContext<TaskStateModel>, action: TaskAction.Update) {
+  //   const task = action.payload
+  //   return this.taskService.editTask(task).pipe(
+  //     finalize(() => {
+  //       ctx.patchState(task)
+  //     })
+  //   )
+  // }
+
+
+
+  }
+
+  @Selector()
+  static tasks(state: TaskStateModel) {
+    return state.tasks
+  }
+
+  @Selector()
+   static genId(state: TaskStateModel) {
+    return state.tasks.length
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,13 +1,10 @@
 <ul>
   <!-- ngForによる繰り返し処理 -->
-  <li *ngFor= "let task of tasks; let i = index">
+  <li *ngFor= "let task of tasks$ | async;">
     <app-task-list-item
       [task]="task"
-      [index]="i"
       >
     </app-task-list-item>
   </li>
-  <li>
     <app-task-form></app-task-form>
-  </li>
 </ul>

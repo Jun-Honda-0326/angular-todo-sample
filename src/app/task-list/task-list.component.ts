@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, Select } from '@ngxs/store'
+import { Observable } from 'rxjs';
 import { Task } from '../../models/task';
-import { TaskService } from '../task.service'
+import { TaskAction } from '../task.action';
+import { TaskState } from '../task.state';
 
 @Component({
   selector: 'app-task-list',
@@ -8,16 +11,16 @@ import { TaskService } from '../task.service'
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-  tasks: Task[]
+  @Select(TaskState.tasks) tasks$: Observable<Task[]>
 
-  constructor(private taskService: TaskService) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
     this.getTasks()
   }
 
   getTasks(): void {
-    this.taskService.getTasks().subscribe(tasks => this.tasks = tasks)
+    this.store.dispatch(new TaskAction.GetAll())
   }
 
 }
