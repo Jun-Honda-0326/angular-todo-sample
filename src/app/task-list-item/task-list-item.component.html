@@ -1,3 +1,4 @@
+
 <label class="{{ task.done ? 'done': ''}}">
   <input type="checkbox" [(ngModel)]="task.done">
   {{ task.title }}
@@ -6,6 +7,7 @@
   <button (click)="active()">編集</button>
   <div *ngIf="show" class="edit">
     <input type="text" [(ngModel)]="task.title">
+    {{task.deadline}}
     <input type="date" [(ngModel)]="task.deadline">
     <button (click)="editTask(task)">更新</button>
   </div>
